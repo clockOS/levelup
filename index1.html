@@ -11,59 +11,57 @@
       <style>
           
           
-          .progress-bar {
+          .levelup1 {
               width: 0;
-              animation: progress 3s ease-out forwards;
+              animation: pre-up 2s ease-in-out forwards;
+            } 
+          
+           .levelup2 {
+              width: 0;
+              animation: post-up 1s ease-out forwards;
             } 
 
-            @keyframes progress {
+            @keyframes pre-up {
               0% {
-                width: 45%;
+                width: 75%;
               }
+
               33% {
                 width: 100%;
               }
-              34% {
-                box-shadow: 0 0 -50px #00FF00;
-              }
-              65% {
+              50% {
                 width: 100%;
               }
-              66% {
-                width: 0;
+              51% {
+                width: 0%;
               }
-              100% {
+                
+              to {
                 width: 30%;
               }
             } 
-            @keyframes show  {
-              from {
-                opacity: 0;
+            @keyframes post-up  {
+              0% {
+                width: 0%;
               }
-              to {
-                opacity: 1;
+
+              100% {
+                width: 35%;
               }
             }
-          
-          p {
-  text-align: center;
-  font-size: 7em;
-  margin: 20px 0 20px 0;
-}
-
-a {
-  text-decoration: none;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;
-}
 
 .glowing {
   color: #fff;
   font-family: Monoton;
   -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
   -moz-animation: neon1 1.5s ease-in-out infinite alternate;
-  animation: neon1 0.5s ease-in-out infinite alternate;
+  animation: neon1 1s ease-in-out alternate;
+}
+          
+.bg-change {
+  -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+  animation: bg-color 1s ease-in-out alternate;
 }
 
 
@@ -95,12 +93,31 @@ a {
   from {
     box-shadow: 0 0 0px #fff, 0 0 0px #fff, 0 0 0px #fff, 0 0 0px #5cb85c, 0 0 0px #5cb85c, 0 0 0px #5cb85c, 0 0 0px #5cb85c, 0 0 0px #5cb85c;
   }
-  to {
+  50% {
     box-shadow: 0 0 0px #fff, 0 0 0px #fff, 0 0 0px #fff, 0 0 80px #FFFF00, 0 0 140px #FFFF00, 0 0 160px #FFFF00, 0 0 200px #FFFF00, 0 0 300px #FFFF00;
+  }
+    
+      100% {
+    box-shadow: 0 0 0px #fff, 0 0 0px #fff, 0 0 0px #fff, 0 0 0px #5cb85c, 0 0 0px #5cb85c, 0 0 0px #5cb85c, 0 0 0px #5cb85c, 0 0 0px #5cb85c;
   }
 
 }
 
+@keyframes bg-color {
+
+  from {
+    background-color: #5cb85c;
+  }
+    
+  50% {
+    background-color: #FFFF00;
+  }
+
+  to {
+    background-color: #5cb85c;
+  }
+
+}
 
       </style>
 
@@ -140,10 +157,9 @@ a {
               <h4 class="modal-title">Modal title</h4>
             </div>
             <div class="modal-body">
-              <div class="progress glowing">
-                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+              <div class="progress" id="exp-full-bar">
+                  <div class="progress-bar progress-bar-success" id="exp-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                     <span class="sr-only">40% Complete (success)</span>
-                      60%
                   </div>
                 </div>
                 <div id="container">
@@ -172,6 +188,38 @@ a {
         $(document).ready(function(){
         
             $('#myModal').modal('show')
+            
+            
+            
+            /*$('#exp-bar').addClass('levelup1').on('animationend webkitAnimationEnd', function(){
+                $("#exp-bar").addClass("bg-change").parent().addClass("glowing");
+                setTimeout(function(){ 
+                
+                    $('#exp-bar').removeClass('levelup1').addClass('levelup2');
+                
+                }, 1000);
+                
+              });*/
+            
+
+                $('#exp-bar').addClass('levelup1');
+
+
+            
+            setTimeout(function(){ 
+
+                $('#exp-full-bar').addClass('glowing');
+                $("#exp-bar").addClass("bg-change");
+
+            }, 1000);
+            
+
+            
+
+
+
+            
+                
         
         
         });

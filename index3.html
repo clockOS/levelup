@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://lib.baomitu.com/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://lib.baomitu.com/animate.css/3.7.0/animate.min.css" rel="stylesheet">
+      <style>
+          .progress{
+              height:40px;
+          }
+          .progress-bar{
+              padding: 10px;
+              text-align:left;
+          }
+          
+          .progress-bar span{
+              font-size:22px;
+              font-weight:600;
+          }
+          .inc-img{
+          
+              height:24px;
+              width:24px;
+              margin-top:-5px;
+              margin-right:2px;
+          
+          }
+          #myModal{
+              background-color:#333;
+          }
+          
+          #level-title{
+              
+              font-size:5em;
+              text-align:center;
+              font-weight:500;
+              text-transform: uppercase;
+              background: linear-gradient(to top, #f35626 0%, #feab3a 100%);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+
+              
+          }
+          .added{
+              font-size:1.5em;
+          }
+          #coin-inc{
+              animation-delay: 0.3s;
+          }
+          #vote-inc{
+              animation-delay: 0.6s;
+          }
+          #exp-inc{
+              animation-delay: 0.9s;
+              color:#5cb85c;
+          }
+          .levelup1 {
+              width: 0;
+              animation: pre-up 3s ease-in-out forwards;
+            } 
+          
+           .levelup2 {
+              width: 0;
+              animation: post-up 1s ease-out forwards;
+            } 
+            @keyframes pre-up {
+              0% {
+                width: 75%;
+              }
+              30% {
+                width: 100%;
+                  background-color: #5cb85c;
+              }
+              50% {
+                width: 100%;
+                  background-color: #FFFF66;
+                 
+              }
+              50.1% {
+                width: 0%;
+              }
+              53% {
+                background-color: #FFFF00;
+              }
+                
+              to {
+                width: 30%;
+              }
+            } 
+            @keyframes post-up  {
+              0% {
+                width: 0%;
+              }
+              100% {
+                width: 35%;
+              }
+            }
+.glowing {
+  -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+  animation: neon1 1s ease-in-out alternate;
+}
+          
+.bg-change {
+  -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+  animation: bg-color 1s ease-in-out alternate;
+}
+/*glow for webkit*/
+@-webkit-keyframes neon1 {
+  from {
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+  }
+  to {
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+  }
+}
+@-moz-keyframes neon1 {
+  from {
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+  }
+  to {
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+  }
+}
+@keyframes neon1 {
+  from {
+    box-shadow: 0 0 0px #fff, 0 0 0px #fff, 0 0 0px #fff, 0 0 0px #5cb85c, 0 0 0px #5cb85c, 0 0 0px #5cb85c, 0 0 0px #5cb85c, 0 0 0px #5cb85c;
+  }
+  50% {
+    box-shadow: 0 0 0px #fff, 0 0 0px #fff, 0 0 0px #fff, 0 0 80px #FFFF00, 0 0 140px #FFFF00, 0 0 160px #FFFF00, 0 0 200px #FFFF00, 0 0 300px #FFFF00;
+  }
+    
+      100% {
+    box-shadow: 0 0 0px #fff, 0 0 0px #fff, 0 0 0px #fff, 0 0 0px #5cb85c, 0 0 0px #5cb85c, 0 0 0px #5cb85c, 0 0 0px #5cb85c, 0 0 0px #5cb85c;
+  }
+}
+@keyframes bg-color {
+  from {
+    background-color: #5cb85c;
+  }
+    
+  50% {
+    background-color: #FFD700;
+  }
+  to {
+    background-color: #5cb85c;
+  }
+}
+canvas {
+    position: absolute;
+    height:100%;
+    width:100%;
+    top: 0;
+    left: 0;
+}
+      </style>
+
+    <title>Starter Template for Bootstrap</title>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+        
+        
+
+      <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+          <canvas id="c"></canvas>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                
+                
+                <div id="level-title" class="bounceIn animated delay-2s">升级了!</div>
+                <p id="coin-inc" class="added fadeIn animated"><img class="inc-img" src="img/1.png">金币+50</p>
+                <p id="vote-inc" class="added fadeIn animated"><img class="inc-img" src="img/3.png">票数+50</p>
+                <p id="exp-inc" class="added fadeIn animated"><img class="inc-img" src="img/4.png">经验+200</p>
+              <div class="progress" id="exp-full-bar">
+                  <div class="progress-bar progress-bar-success" id="exp-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+                                    <span id="exp-value">300</span><span id="min-exp">/600</span>
+                  </div>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+    </div>
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://lib.baomitu.com/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <script src="https://lib.baomitu.com/countup.js/1.9.3/countUp.min.js"></script>
+      <script>
+        $(document).ready(function(){
+            
+            $("canvas").hide();
+            
+            $('#myModal').modal('show')
+            
+            
+            
+            /*$('#exp-bar').addClass('levelup1').on('animationend webkitAnimationEnd', function(){
+                $("#exp-bar").addClass("bg-change").parent().addClass("glowing");
+                setTimeout(function(){ 
+                
+                    $('#exp-bar').removeClass('levelup1').addClass('levelup2');
+                
+                }, 1000);
+                
+              });*/
+            
+                
+            
+            setTimeout(function(){ 
+                $('#exp-bar').addClass('levelup1');
+                
+                var options = {
+                    useEasing : false,
+                    useGrouping : false,
+                    separator : "'",
+                    decimal : '.',
+                    prefix : '',
+                    suffix : ''
+                };
+                var demo = new CountUp("exp-value", 300, 600, 0, 1, options);
+                demo.start(function() {
+                    $("canvas").show();
+                });
+                
+            }, 1200);
+            
+
+            
+        setTimeout(function(){    
+            
+            $("#min-exp").text("/780");
+            
+            
+            
+            var options = {
+            useEasing : false,
+            useGrouping : false,
+            separator : "'",
+            decimal : '.',
+            prefix : '',
+            suffix : ''
+        };
+            var demo = new CountUp("exp-value", 0, 200, 0, 1.5, options);
+            demo.start(function() {
+ 
+            });
+        }, 2700);
+
+            
+            
+            
+            
+                
+        
+        
+        });
+          
+          
+          
+          
+          var gl = c.getContext( 'webgl', { preserveDrawingBuffer: true } )
+    ,   w = c.width = window.innerWidth
+    ,   h = c.height = window.innerHeight
+
+    ,   webgl = {}
+    ,   opts = {
+        projectileAlpha: 2,
+        projectileLineWidth: 3,
+        fireworkAngleSpan: .5,
+        baseFireworkVel: 3,
+        addedFireworkVel: 3,
+        gravity: .02,
+        lowVelBoundary: -.2,
+        xFriction: .995,
+        baseShardVel: 1,
+        addedShardVel: .2,
+        fireworks: 30,
+        baseShardsParFirework: 10,
+        addedShardsParFirework: 10,
+        shardFireworkVelMultiplier: .3,
+        initHueMultiplier: 1/360,
+        runHueAdder: .1/360
+    }
+
+webgl.vertexShaderSource = `
+uniform int u_mode;
+uniform vec2 u_res;
+attribute vec4 a_data;
+varying vec4 v_color;
+
+vec3 h2rgb( float h ){
+    return clamp( abs( mod( h * 6. + vec3( 0, 4, 2 ), 6. ) - 3. ) -1., 0., 1. );
+}
+void clear(){
+    gl_Position = vec4( a_data.xy, 0, 1 );
+    v_color = vec4( 0, 0, 0, a_data.w );
+}
+void draw(){
+    gl_Position = vec4( vec2( 1, -1 ) * ( ( a_data.xy / u_res ) * 2. - 1. ), 0, 1 );
+    v_color = vec4( h2rgb( a_data.z ), a_data.w );
+}
+void main(){
+    if( u_mode == 0 )
+        draw();
+    else
+        clear();
+}
+`;
+webgl.fragmentShaderSource = `
+precision mediump float;
+varying vec4 v_color;
+
+void main(){
+    gl_FragColor = v_color;
+}
+`;
+
+webgl.vertexShader = gl.createShader( gl.VERTEX_SHADER );
+gl.shaderSource( webgl.vertexShader, webgl.vertexShaderSource );
+gl.compileShader( webgl.vertexShader );
+
+webgl.fragmentShader = gl.createShader( gl.FRAGMENT_SHADER );
+gl.shaderSource( webgl.fragmentShader, webgl.fragmentShaderSource );
+gl.compileShader( webgl.fragmentShader );
+
+webgl.shaderProgram = gl.createProgram();
+gl.attachShader( webgl.shaderProgram, webgl.vertexShader );
+gl.attachShader( webgl.shaderProgram, webgl.fragmentShader );
+
+gl.linkProgram( webgl.shaderProgram );
+gl.useProgram( webgl.shaderProgram );
+
+webgl.dataAttribLoc = gl.getAttribLocation( webgl.shaderProgram, 'a_data' );
+webgl.dataBuffer = gl.createBuffer();
+
+gl.enableVertexAttribArray( webgl.dataAttribLoc );
+gl.bindBuffer( gl.ARRAY_BUFFER, webgl.dataBuffer );
+gl.vertexAttribPointer( webgl.dataAttribLoc, 4, gl.FLOAT, false, 0, 0 );
+
+webgl.resUniformLoc = gl.getUniformLocation( webgl.shaderProgram, 'u_res' );
+webgl.modeUniformLoc = gl.getUniformLocation( webgl.shaderProgram, 'u_mode' );
+
+gl.viewport( 0, 0, w, h );
+gl.uniform2f( webgl.resUniformLoc, w, h );
+
+gl.blendFunc( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA );
+gl.enable( gl.BLEND );
+
+gl.lineWidth( opts.projectileLineWidth );
+
+webgl.data = [];
+
+webgl.clear = function(){
+    
+    gl.uniform1i( webgl.modeUniformLoc, 1 );
+    var a = .1;
+    webgl.data = [
+        -1, -1, 0, a,
+         1, -1, 0, a,
+        -1,  1, 0, a,
+        -1,  1, 0, a,
+         1, -1, 0, a,
+         1,  1, 0, a
+    ];
+    webgl.draw( gl.TRIANGLES );
+    gl.uniform1i( webgl.modeUniformLoc, 0 );
+    webgl.data.length = 0;
+}
+webgl.draw = function( glType ){
+    
+    gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( webgl.data ), gl.STATIC_DRAW );
+    gl.drawArrays( glType, 0, webgl.data.length / 4 );
+}
+
+var fireworks = []
+    ,   tick = 0
+    ,   sins = []
+    ,   coss = []
+    ,   maxShardsParFirework = opts.baseShardsParFirework + opts.addedShardsParFirework
+    ,   tau = 6.283185307179586476925286766559;
+
+for( var i = 0; i < maxShardsParFirework; ++i ){
+    sins[ i ] = Math.sin( tau * i / maxShardsParFirework );
+    coss[ i ] = Math.cos( tau * i / maxShardsParFirework );
+}
+
+function Firework(){
+    this.reset();
+    this.shards = [];
+    for( var i = 0; i < maxShardsParFirework; ++i )
+        this.shards.push( new Shard( this ) );
+}
+Firework.prototype.reset = function(){
+    
+    var angle = -Math.PI / 2 + ( Math.random() - .5 )* opts.fireworkAngleSpan
+        ,   vel = opts.baseFireworkVel + opts.addedFireworkVel * Math.random();
+    
+    this.mode = 0;
+    this.vx = vel * Math.cos( angle );
+    this.vy = vel * Math.sin( angle );
+    
+    this.x = Math.random() * w;
+    this.y = h;
+    
+    this.hue = tick * opts.initHueMultiplier;
+    
+}
+Firework.prototype.step = function(){
+    
+    if( this.mode === 0 ){
+        
+        var ph = this.hue
+            ,   px = this.x
+            ,   py = this.y;
+        
+        this.hue += opts.runHueAdder;
+    
+        this.x += this.vx *= opts.xFriction;
+        this.y += this.vy += opts.gravity;
+        
+        webgl.data.push(
+            px, py, ph, opts.projectileAlpha * .2,
+            this.x, this.y, this.hue, opts.projectileAlpha * .2 );
+        
+        if( this.vy >= opts.lowVelBoundary ){
+            this.mode = 1;
+
+            this.shardAmount = opts.baseShardsParFirework + opts.addedShardsParFirework * Math.random() | 0;
+
+            var baseAngle = Math.random() * tau
+                ,   x = Math.cos( baseAngle )
+                ,   y = Math.sin( baseAngle )
+                ,   sin = sins[ this.shardAmount ]
+                ,   cos = coss[ this.shardAmount ];
+
+            for( var i = 0; i < this.shardAmount; ++i ){
+
+                var vel = opts.baseShardVel + opts.addedShardVel * Math.random();
+                this.shards[ i ].reset( x * vel, y * vel )
+                var X = x;
+                x = x * cos - y * sin;
+                y = y * cos + X * sin;
+            }
+        }
+
+    } else if( this.mode === 1 ) {
+        
+        this.ph = this.hue
+        this.hue += opts.runHueAdder;
+        
+        var allDead = true;
+        for( var i = 0; i < this.shardAmount; ++i ){
+            var shard = this.shards[ i ];
+            if( !shard.dead ){
+                shard.step();
+                allDead = false;
+            }
+        }
+        
+        if( allDead )
+            this.reset();
+    }
+    
+}
+function Shard( parent ){
+    this.parent = parent;
+}
+Shard.prototype.reset = function( vx, vy ){
+    this.x = this.parent.x;
+    this.y = this.parent.y;
+    this.vx = this.parent.vx * opts.shardFireworkVelMultiplier + vx;
+    this.vy = this.parent.vy * opts.shardFireworkVelMultiplier + vy;
+    this.starty = this.y;
+    this.dead = false;
+    this.tick = 1;
+}
+Shard.prototype.step = function(){
+    
+    this.tick += .05;
+    
+    var px = this.x
+        ,   py = this.y;
+    
+    this.x += this.vx *= opts.xFriction;
+    this.y += this.vy += opts.gravity;
+    
+    var proportion = 1 - ( this.y - this.starty ) / ( h - this.starty );
+    
+    webgl.data.push(
+        px, py, this.parent.ph, opts.projectileAlpha / this.tick,
+        this.x, this.y, this.parent.hue, opts.projectileAlpha / this.tick );
+    
+    if( this.y > h )
+        this.dead = true;
+}
+
+function anim(){
+    
+    window.requestAnimationFrame( anim )
+    
+    webgl.clear();
+    
+    ++tick;
+    
+    if( fireworks.length < opts.fireworks )
+        fireworks.push( new Firework );
+    
+    fireworks.map( function( firework ){ firework.step(); } );
+    
+    webgl.draw( gl.LINES );
+}
+anim();
+
+window.addEventListener( 'resize', function(){
+    
+    w = c.width = window.innerWidth;
+    h = c.height = window.innerHeight;
+    
+    gl.viewport( 0, 0, w, h );
+    gl.uniform2f( webgl.resUniformLoc, w, h );
+})
+window.addEventListener( 'click', function( e ){
+    var firework = new Firework();
+    firework.x = e.clientX;
+    firework.y = e.clientY;
+    firework.vx = 0;
+    firework.vy = 0;
+    fireworks.push( firework );
+});
+      </script>
+
+  </body>
+</html>
